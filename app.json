@@ -1,25 +1,62 @@
 {
   "expo": {
-    "name": "attendance-app",
+    "name": "Attendance App",
     "slug": "attendance-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "attendanceapp",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.attendance.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Camera is used to capture selfies for face enrollment and attendance.",
+        "NSLocationWhenInUseUsageDescription": "Location is recorded when staff mark attendance."
+      }
     },
     "android": {
+      "package": "com.attendance.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+      ],
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-sqlite",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Attendance App to use the camera for selfie face verification."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow Attendance App to record your location when marking attendance."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Attendance App to choose a staff photo for face enrollment.",
+          "cameraPermission": "Allow Attendance App to use the camera for selfie face verification.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-dev-client",
+      "./plugins/withHideDevMenuButton"
+    ]
   }
 }
